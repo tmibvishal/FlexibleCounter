@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import tmib.vishal.flexiblecounter.adapters.customAdapter;
 
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
+    String[] dataset = {"item 1", "item 2", "item 3", "item 4", "item 5"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +23,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recylerView);
-        // used to increase performance in case the layout size does not changes
-        mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(this);
+        // used to increase performance in case the layout size does not changes
+        //mRecyclerView.setHasFixedSize(true);
+
+        // (No of columns, Linear Layout Manager)
+        mLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new customAdapter();
