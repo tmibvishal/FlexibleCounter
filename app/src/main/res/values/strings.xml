@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flexible Counter</string>
+    <string name="Add_New_Item_Name_MainScreen">Enter Item</string>
 </resources>
