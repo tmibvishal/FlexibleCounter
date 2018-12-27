@@ -21,8 +21,8 @@ public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHold
 
     String[] dataset = {"40", "20", "60", "30", "35", "40", "20", "60", "30", "35", "40", "20", "60", "30", "35"};
     Random rand = new Random();
-    //String[] color = {"#B3E5FC", "#C8E6C9","#B2EBF2", "#FFE0B2", "#D7CCC8"};
-    int[] colorCode = {-4987396, -3610935, -5051406, -8014, -2634552};
+    //String[] color = {"#B3E5FC", "#C8E6C9","#FFCCBC", "#FFE0B2", "#D7CCC8", "#CFD8DC", "#D7CCC8", "#F0F4C3"};
+    int[] colorCode = {-4987396, -3610935, -13124, -8014, -2634552, -3155748, -2634552, -985917};
     int[] heights = {40, 80, 60, 30, 50};
 
 
@@ -38,10 +38,10 @@ public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
-        myViewHolder.mTextView.setTextSize(heights[i%5]);
+        //myViewHolder.mTextView.setTextSize(heights[i%5]);
         myViewHolder.mTextView.setText(dataset[i]);
-        myViewHolder.mLinearLayout.setBackgroundColor(colorCode[i%5]);
-        //Log.d("color code ", String.valueOf(Color.parseColor(color[i])));
+         //myViewHolder.mLinearLayout.setBackgroundColor(colorCode[i%8]);
+        //Log.d("color code ", String.valueOf(Color.parseColor(color[i%8])));
 
     }
 
