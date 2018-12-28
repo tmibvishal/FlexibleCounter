@@ -1,82 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:id="@+id/titleTextView_activitycp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <ImageButton
+        android:id="@+id/backButton_activitycp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_arrow_back_black"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        />
 
-    <TextView
-        android:layout_below="@+id/titleTextView_activitycp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:id="@+id/dateLabelTextView_activitycp"
-        android:fontFamily="sans-serif"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_toRightOf="@+id/backButton_activitycp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/dateTextView_activitycp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleTextView_activitycp"
-        android:layout_toEndOf="@+id/dateLabelTextView_activitycp"
-        android:layout_toRightOf="@+id/dateLabelTextView_activitycp"
-        android:layout_marginLeft="10dp"
-        android:fontFamily="sans-serif"
-        android:text="16 Oct 2018"
-        android:textColor="#666666"
-        android:textSize="20sp"
-         />
+        <TextView
+            android:id="@+id/titleTextView_activitycp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Title"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dateLabelTextView_activitycp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleTextView_activitycp"
+            android:fontFamily="sans-serif"
+            android:text="Date"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dateTextView_activitycp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleTextView_activitycp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/dateLabelTextView_activitycp"
+            android:layout_toRightOf="@+id/dateLabelTextView_activitycp"
+            android:fontFamily="sans-serif"
+            android:text="16 Oct 2018"
+            android:textColor="#666666"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/countTextView_activitycp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dateLabelTextView_activitycp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="-200dp"
         android:fontFamily="sans-serif-condensed"
         android:text="100"
         android:textColor="#000"
         android:textSize="90dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearLayoutHorizontol_activitycp"/>
 
     <LinearLayout
+        android:id="@+id/linearLayoutHorizontol_activitycp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/countTextView_activitycp"
+        android:layout_centerVertical="true"
         android:gravity="center"
+        android:orientation="horizontal"
         >
+
         <ImageButton
             android:id="@+id/buttonAdd_activitycp"
             android:layout_width="150dp"
             android:layout_height="75dp"
+            android:layout_margin="20dp"
             android:background="@drawable/button"
             android:elevation="10dp"
             android:src="@drawable/ic_add_white"
-            android:textColor="#fff"
-            android:layout_margin="20dp"/>
+            android:textColor="#fff" />
+
         <ImageButton
             android:layout_width="100dp"
             android:layout_height="75dp"
             android:layout_below="@+id/countTextView_activitycp"
+            android:layout_margin="20dp"
             android:background="@drawable/button"
             android:elevation="10dp"
             android:src="@drawable/ic_remove_white"
-            android:textColor="#fff"
-            android:layout_margin="20dp"/>
+            android:textColor="#fff" />
     </LinearLayout>
+
+    <NumberPicker
+        android:id="@+id/numberpicker_activitycp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayoutHorizontol_activitycp"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

@@ -60,8 +60,8 @@ public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHold
             public void onClick(View v) {
                 Intent intent = new Intent(mMainActivityContext, CountpageActivity.class);
                 intent.putExtra("title", title[i]);
-                intent.putExtra("date", title[i]);
-                intent.putExtra("count", title[i]);
+                intent.putExtra("date", date[i]);
+                intent.putExtra("count", count[i]);
                 mMainActivityContext.startActivity(intent);
             }
         });
