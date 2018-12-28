@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
 import java.util.Random;
 
 import tmib.vishal.flexiblecounter.CountpageActivity;
@@ -23,16 +24,21 @@ import tmib.vishal.flexiblecounter.R;
 
 public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHolder> {
 
-    static String[] title = {"Tile 1", "calories", "total run", "total discount", "Tile 2", "Tile 3", "Tile 4", "Tile 5", "Tile 6", "Tile 1", "Tile 7", "Tile 8", "Tile 1", "Tile 9", "35"};
-    static String[] date = {"22\nDec\n2018", "21\nDec\n2018", "18\nDec\n2018", "17\nDec\n2018", "14\nDec\n2018", "12\nDec\n2018", "10\nDec\n2018", "8\nDec\n2018", "6\nDec\n2018", "4\nDec\n2018", "23\nNov\n2018", "22\nNov\n2018", "20\nNov\n2018", "18\nNov\n2018", "18\nNov\n2018"};
-    static String[] count = {"40", "20", "60", "30", "35", "40", "20", "60", "30", "35", "40", "20", "60", "30", "35"};
+    public static List<String> title;
+    public static List<String> date;
+    public static List<String> count;
+
+
 
     //String[] color = {"#B3E5FC", "#C8E6C9","#FFCCBC", "#FFE0B2", "#D7CCC8", "#CFD8DC", "#D7CCC8", "#F0F4C3"};
     //int[] colorCode = {-4987396, -3610935, -13124, -8014, -2634552, -3155748, -2634552, -985917};
     //int[] heights = {40, 80, 60, 30, 50};
     static Context mMainActivityContext;
 
-    public customAdapter(Context context){
+    public customAdapter(Context context, List<String> title, List<String> date, List<String> count){
+        this.title = title;
+        this.date = date;
+        this.count = count;
         mMainActivityContext = context;
     }
     @NonNull
@@ -48,30 +54,15 @@ public class customAdapter extends RecyclerView.Adapter<customAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
 
         //myViewHolder.mTextView.setTextSize(heights[i%5]);
-        myViewHolder.mTextViewTitle.setText(title[i]);
-        myViewHolder.mTextViewDate.setText(date[i]);
-        myViewHolder.mTextViewCount.setText(count[i]);
-         //myViewHolder.mLinearLayout.setBackgroundColor(colorCode[i%8]);
-        //Log.d("color code ", String.valueOf(Color.parseColor(color[i%8])));
-
-        /*
-        myViewHolder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mMainActivityContext, CountpageActivity.class);
-                intent.putExtra("title", title[i]);
-                intent.putExtra("date", date[i]);
-                intent.putExtra("count", count[i]);
-                mMainActivityContext.startActivity(intent);
-            }
-        });
-        */
+        myViewHolder.mTextViewTitle.setText(title.get(i));
+        myViewHolder.mTextViewDate.setText(date.get(i));
+        myViewHolder.mTextViewCount.setText(count.get(i));
 
     }
 
     @Override
     public int getItemCount() {
-        return title.length;
+        return title.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{

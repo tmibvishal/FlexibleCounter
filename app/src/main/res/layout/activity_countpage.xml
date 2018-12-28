@@ -89,6 +89,7 @@
             android:textColor="#fff" />
 
         <ImageButton
+            android:id="@+id/buttonDecrease_activitycp"
             android:layout_width="100dp"
             android:layout_height="75dp"
             android:layout_below="@+id/countTextView_activitycp"

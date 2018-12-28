@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -20,27 +22,62 @@ public class CountpageActivity extends AppCompatActivity {
     String title="";
     String date="";
     String count="";
+    int position=0;
     TextView mTitleTextView;
     TextView mDateTextView;
     TextView mCountTextView;
+
+    ImageButton mAddbtn;
+    ImageButton mDeleteButton;
+    ImageButton mBackButton;
+    NumberPicker mNumberPicker;
+    int countInteger=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countpage);
 
-        NumberPicker mNumberPicker = (NumberPicker) findViewById(R.id.numberpicker_activitycp);
+        mNumberPicker = (NumberPicker) findViewById(R.id.numberpicker_activitycp);
         mNumberPicker.setMinValue(1);
         mNumberPicker.setMaxValue(1000);
 
         mTitleTextView = (TextView) findViewById(R.id.titleTextView_activitycp);
         mDateTextView = (TextView) findViewById(R.id.dateTextView_activitycp);
         mCountTextView = (TextView) findViewById(R.id.countTextView_activitycp);
+        mAddbtn = (ImageButton) findViewById(R.id.buttonAdd_activitycp);
+        mDeleteButton = (ImageButton) findViewById(R.id.buttonDecrease_activitycp);
+        mBackButton = (ImageButton) findViewById(R.id.backButton_activitycp);
+
+        mAddbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countInteger = countInteger + mNumberPicker.getValue();
+                count = String.valueOf(countInteger);
+                mCountTextView.setText(count);
+            }
+        });
+        mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countInteger = countInteger - mNumberPicker.getValue();
+                count = String.valueOf(countInteger);
+                mCountTextView.setText(count);
+            }
+        });
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+            }
+        });
 
         getExtra();
         setExtra();
 
     }
+
 
     private void getExtra() {
         if (getIntent().hasExtra("title") && getIntent().hasExtra("date") && getIntent().hasExtra("count")) {
@@ -48,6 +85,13 @@ public class CountpageActivity extends AppCompatActivity {
             date = getIntent().getStringExtra("date");
             date = date.replace('\n', ' ');
             count = getIntent().getStringExtra("count");
+            position = getIntent().getIntExtra("position", 0);
+        }
+        try{
+            countInteger = Integer.parseInt(count);
+        }
+        catch (Exception e){
+
         }
     }
 
@@ -55,5 +99,11 @@ public class CountpageActivity extends AppCompatActivity {
         mTitleTextView.setText(title);
         mDateTextView.setText(date);
         mCountTextView.setText(count);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.count.set(position, count);
     }
 }
