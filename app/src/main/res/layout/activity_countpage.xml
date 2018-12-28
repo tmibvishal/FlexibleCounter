@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:id="@+id/titleTextView_activitycp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_below="@+id/titleTextView_activitycp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/dateLabelTextView_activitycp"
+        android:fontFamily="sans-serif"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dateTextView_activitycp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleTextView_activitycp"
+        android:layout_toEndOf="@+id/dateLabelTextView_activitycp"
+        android:layout_toRightOf="@+id/dateLabelTextView_activitycp"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif"
+        android:text="16 Oct 2018"
+        android:textColor="#666666"
+        android:textSize="20sp"
+         />
+
+    <TextView
+        android:id="@+id/countTextView_activitycp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateLabelTextView_activitycp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="100"
+        android:textColor="#000"
+        android:textSize="90dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/countTextView_activitycp"
+        android:gravity="center"
+        >
+        <ImageButton
+            android:id="@+id/buttonAdd_activitycp"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:background="@drawable/button"
+            android:elevation="10dp"
+            android:src="@drawable/ic_add_white"
+            android:textColor="#fff"
+            android:layout_margin="20dp"/>
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_below="@+id/countTextView_activitycp"
+            android:background="@drawable/button"
+            android:elevation="10dp"
+            android:src="@drawable/ic_remove_white"
+            android:textColor="#fff"
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
