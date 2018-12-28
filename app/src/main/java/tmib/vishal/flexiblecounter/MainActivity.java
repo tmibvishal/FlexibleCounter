@@ -27,6 +27,7 @@ import tmib.vishal.flexiblecounter.adapters.customAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static boolean returnedFromAddNewActivity = false;
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
@@ -46,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        title.add("ddede");
-        date.add("ddede");
-        count.add("20");
-        title.add(0, "ppp");
-        date.add(0, "pp");
-        count.add(0, "10");
+        title.add("2");
+        date.add("2");
+        count.add("2");
+        title.add(0, "1");
+        date.add(0, "1");
+        count.add(0, "1");
+
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recylerView);
 
@@ -86,25 +89,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-
         floatingActionButton = (FloatingActionButton) findViewById(R.id.addNewItem);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                title.add(0, "eee");
-                date.add(0, "eee");
-                count.add(0, "20");
-                //if you only want to show the change at a specific position
-                mAdapter.notifyItemInserted(0);
-                //mAdapter.notifyDataSetChanged();
+                Intent intent = new Intent(MainActivity.this, AddnewitemActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
+
+
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (returnedFromAddNewActivity){
+            mAdapter.notifyItemInserted(0);
+            returnedFromAddNewActivity = false;
+            return;
+        }
         mAdapter.notifyDataSetChanged();
     }
 
