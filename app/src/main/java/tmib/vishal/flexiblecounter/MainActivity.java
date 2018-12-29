@@ -2,32 +2,37 @@ package tmib.vishal.flexiblecounter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import tmib.vishal.flexiblecounter.adapters.customAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     public static boolean returnedFromAddNewActivity = false;
+    public static final String MY_PREFS_NAME = "tmib.vishal.flexiblecounter";
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RecyclerView.Adapter mAdapter;
@@ -42,19 +47,34 @@ public class MainActivity extends AppCompatActivity {
     public static List<String> date = new ArrayList<String>();
     public static List<String> count = new ArrayList<String>();
 
+
+    Set<String> setTitle = new HashSet<String>();
+    Set<String> setDate = new HashSet<String>();
+    Set<String> setCount = new HashSet<String>();
+
+    TextView emptyRecylerViewText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        title.add("2");
-        date.add("2");
-        count.add("2");
-        title.add(0, "1");
-        date.add(0, "1");
-        count.add(0, "1");
+        //getting the saved data
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String restoredText = prefs.getString("text", null);
+        if (restoredText != null) {
+            Log.d("Main acitivty", "setTitle while loading oncreate is : " + setTitle);
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<String>>() {}.getType();
+            title = gson.fromJson(prefs.getString("setTitle", null), type);
+            date = gson.fromJson(prefs.getString("setDate", null), type);
+            count = gson.fromJson(prefs.getString("setCount", null), type);
+        }
 
-
+        emptyRecylerViewText = (TextView) findViewById(R.id.emptyRecylerViewText);
+        if(title.size() == 0){
+            emptyRecylerViewText.setVisibility(View.VISIBLE);
+        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recylerView);
 
@@ -104,11 +124,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainActivity: ", "onStop is called ");
+
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        Gson gson = new Gson();
+        editor.putString("setTitle", gson.toJson(title));
+        editor.putString("setDate", gson.toJson(date));
+        editor.putString("setCount", gson.toJson(count));
+        editor.putString("text", " ");
+        editor.apply();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (returnedFromAddNewActivity){
             mAdapter.notifyItemInserted(0);
             returnedFromAddNewActivity = false;
+            emptyRecylerViewText.setVisibility(View.GONE);
             return;
         }
         mAdapter.notifyDataSetChanged();
