@@ -1,28 +1,22 @@
 package tmib.vishal.flexiblecounter;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 
 public class CountpageActivity extends AppCompatActivity {
     private static final String TAG = "CountpageActivity";
 
-    String title="";
-    String date="";
-    String count="";
-    int position=0;
+    String title = "";
+    String date = "";
+    String count = "";
+    int position = 0;
     TextView mTitleTextView;
     TextView mDateTextView;
     TextView mCountTextView;
@@ -30,8 +24,9 @@ public class CountpageActivity extends AppCompatActivity {
     ImageButton mAddbtn;
     ImageButton mDeleteButton;
     ImageButton mBackButton;
+    Button mResetButton;
     NumberPicker mNumberPicker;
-    int countInteger=0;
+    int countInteger = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +43,7 @@ public class CountpageActivity extends AppCompatActivity {
         mAddbtn = (ImageButton) findViewById(R.id.buttonAdd_activitycp);
         mDeleteButton = (ImageButton) findViewById(R.id.buttonDecrease_activitycp);
         mBackButton = (ImageButton) findViewById(R.id.backButton_activitycp);
+        mResetButton = (Button) findViewById(R.id.reset_activitycp);
 
         mAddbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +68,14 @@ public class CountpageActivity extends AppCompatActivity {
 
             }
         });
+        mResetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                countInteger = 0;
+                count = String.valueOf(countInteger);
+                mCountTextView.setText(count);
+            }
+        });
 
         getExtra();
         setExtra();
@@ -87,10 +91,9 @@ public class CountpageActivity extends AppCompatActivity {
             count = getIntent().getStringExtra("count");
             position = getIntent().getIntExtra("position", 0);
         }
-        try{
+        try {
             countInteger = Integer.parseInt(count);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
     }

@@ -108,4 +108,15 @@
         android:layout_centerHorizontal="true"
         />
 
+    <Button
+        android:background="@drawable/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="Reset"
+        android:textColor="#fff"
+        android:id="@+id/reset_activitycp"
+        android:layout_alignParentRight="true" />
+
 </RelativeLayout>
